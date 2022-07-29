@@ -3,25 +3,26 @@ import java.util.Random;
 import java.awt.Graphics2D;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MyLabel extends JLabel {
-
+	Color color;
 	int x, y, a, b;
 	int auxX = 1;
 	int auxY = 1;
 	float speed = 0;
 	Point p = new Point();
 
-	MyLabel(int _x, int _y, Point _p) {
+	MyLabel(int _x, int _y, Point _p, Color _color) {
 		this.a = 50;
 		this.b = 50;
 		this.p = _p;
 		this.x = _x;
 		this.y = _y;
-
+		this.color = _color;
 		aleatorizar();
 
 		setBounds(x, y, a, b);
@@ -47,6 +48,7 @@ public class MyLabel extends JLabel {
 
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
+		g2.setColor(color);
 		g2.fillOval(0, 0, a, b);
 	}
 

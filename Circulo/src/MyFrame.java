@@ -1,10 +1,11 @@
 import java.awt.*;
+import java.util.Random;
 import javax.swing.*;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 public class MyFrame extends JFrame{
 	MyLabel[] ml= new MyLabel[10];
 	Point p = new Point(0,1);
+	Random random = new Random();
+	Color color[] = {Color.PINK,Color.blue,Color.red,Color.yellow,Color.orange};
 	/**
 	 * 
 	 */
@@ -17,7 +18,8 @@ public class MyFrame extends JFrame{
 		setResizable(false);
 		
 		for (int i=0;i<5;i++) {
-			ml[i] = new MyLabel(100*i,100*i, p);
+			Color cor = color[random.nextInt(5)];
+			ml[i] = new MyLabel(100*i,100*i, p,cor);
 			add(ml[i]);
 		}
 		
