@@ -22,15 +22,18 @@ public class MyLabel extends JLabel {
 	Point p = new Point();
 
 	MyLabel(int _x, int _y, Point _p, Color _color) {
-		this.a = 200;
-		this.b = 200;
+		this.a = 100;
+		this.b = 100;
 		this.p = _p;
 		this.x = _x;
 		this.y = _y;
 		this.color = _color;
 		aleatorizar();
-
-		setBounds(x, y, a, b);
+		this.oval.x=this.x;
+		this.oval.y=this.y;
+		this.oval.width=this.a;
+		this.oval.height=this.b;
+		setBounds((int)this.oval.x, (int)this.oval.y, (int)this.oval.width, (int)this.oval.height);
 		setVisible(true);
 		new Mover().start();
 	}
@@ -54,20 +57,23 @@ public class MyLabel extends JLabel {
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(color);
-		oval.setFrame(0, 0, a, b);
-		area1 = new Area(oval);
-		g2.fill(area1); 
-		//g2.fillOval(0, 0, a, b);
+		//oval.setFrame(0, 0, a, b);
+		//area1 = new Area(oval);
+		//g2.fill(area1); 
+		//this.oval.x = this.x;
+		//this.oval.y = this.y;
+		//this.oval.width *= a;
+		//this.oval.height *= b;
+		g2.fillOval((int)this.oval.x, (int)this.oval.y, (int)this.oval.width, (int)this.oval.height);
 	}
 
-	public  boolean testIntersection(Area areaB) {
+	public  boolean testIntersection(Ellipse2D.Double oval1, Ellipse2D.Double oval2) {
 		
+		Area areaA = new Area(oval1);
+		areaA.intersect(new Area(oval2));
+		  System.out.println(areaA.isEmpty());
 		  
-		area1.intersect(areaB);
-		  System.out.println(area1.isEmpty());
-		  System.out.println(areaB);
-		  System.out.println(area1);
-		  return !area1.isEmpty();
+		  return !areaA.isEmpty();
 		}
 	/*
 	public void Collision(Area area1  ,Area area2 )
