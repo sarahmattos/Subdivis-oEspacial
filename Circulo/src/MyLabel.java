@@ -11,26 +11,35 @@ import javax.swing.JPanel;
 import java.awt.geom.Ellipse2D;
 import java.awt.event.*;
 public class MyLabel extends JLabel {
-	Ellipse2D.Double oval = new Ellipse2D.Double();
+	Ellipse2D.Float oval = new Ellipse2D.Float();
 	Color color;
-	int x, y, a, b;
+	float x, y;
+	float a, b;
 	int auxX = 1;
 	int auxY = 1;
-	 Area area1; 
-	 Area area2;
 	float speed = 0;
 	Point p = new Point();
 
+	
 	MyLabel(int _x, int _y, Point _p, Color _color) {
-		this.a = 200;
-		this.b = 200;
-		this.p = _p;
+		//this.oval=_oval;
+		
+		this.a = 50f;
+		this.b = 50f;
 		this.x = _x;
 		this.y = _y;
+		this.p = _p;
 		this.color = _color;
+		
+		oval.x=x;
+		oval.y=y;
+		oval.width=a;
+		oval.height=b;
 		aleatorizar();
-
-		setBounds(x, y, a, b);
+		
+		System.out.println(oval.height);
+		setBounds((int)oval.x,(int)oval.y, (int)oval.width, (int)oval.height);
+		//setBounds(100,100, 50, 50);
 		setVisible(true);
 		new Mover().start();
 	}
@@ -53,20 +62,30 @@ public class MyLabel extends JLabel {
 
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
+		
 		g2.setColor(color);
-		oval.setFrame(0, 0, a, b);
-		area1 = new Area(oval);
-		g2.fill(area1); 
+		
+		//this.oval.x = this.x;
+		//this.oval.y = this.y;
+		//this.oval.width *= this.x;
+		//this.oval.height *= this.y;
+		
+		
+		g2.fillOval((int)oval.x,(int)oval.y, (int)oval.height, (int)oval.width);
+		//g2.fillOval(100,100,50, 50);
+		//oval.setFrame(0, 0, a, b);
+		//area1 = new Area(oval);
+		//g2.fill(area1); 
 		//g2.fillOval(0, 0, a, b);
+		//System.out.println(oval.x);
 	}
 
-	public  boolean testIntersection(Area areaB) {
+	public  boolean testIntersection(Ellipse2D.Float oval1, Ellipse2D.Float oval2) {
 		
-		  
-		area1.intersect(areaB);
+		  Area area1 = new Area(oval1);
+		area1.intersect(new Area(oval2));
 		  System.out.println(area1.isEmpty());
-		  System.out.println(areaB);
-		  System.out.println(area1);
+		 // System.out.println(area1);
 		  return !area1.isEmpty();
 		}
 	/*
@@ -103,14 +122,14 @@ public class MyLabel extends JLabel {
 				x -= speed * auxX;
 				y -= speed * auxY;
 
-				if (x > 800 - a - 15 || x < 0) {
+				if (x > 800 - 50 - 15 || x < 0) {
 					contrarioX();
 				}
-				if (y > 600 - b - 40 || y < 0) {
+				if (y > 600 - 50 - 40 || y < 0) {
 					contrarioY();
 				}
 
-				setLocation(x, y);
+				setLocation((int)x, (int)y);
 
 				try {
 					sleep(10);
