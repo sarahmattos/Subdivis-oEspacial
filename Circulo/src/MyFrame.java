@@ -17,15 +17,34 @@ public class MyFrame extends JFrame{
 		setBounds(0, 0, 800, 600);
 		setResizable(false);
 		
-		for (int i=0;i<5;i++) {
+		for (int i=0;i<ml.length;i++) {
 			Color cor = color[random.nextInt(5)];
 			ml[i] = new MyLabel(100*i,100*i, p,cor);
 			add(ml[i]);
 		}
 		
-		
+		 new Mover().start();
 		
 	}
 	
-	
+	public class Mover extends Thread {
+		public void run() {
+
+			while (true) {
+
+				for (int i=0; i<ml.length ;i++) {
+					ml[i].Update();
+					System.out.print("chamou");
+				}
+				try {
+					sleep(10);
+
+				} catch (Exception erro) {
+
+				}
+
+			}
+		}
+
+	}
 }

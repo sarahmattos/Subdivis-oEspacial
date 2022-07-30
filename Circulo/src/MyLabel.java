@@ -10,13 +10,14 @@ import javax.swing.JPanel;
 import java.awt.geom.Rectangle2D;
 
 public class MyLabel extends JLabel {
-	
+
 	Color color;
 	int x, y, a, b;
 	int auxX = 1;
 	int auxY = 1;
 	float speed = 0;
 	Point p = new Point();
+
 	MyLabel(int _x, int _y, Point _p, Color _color) {
 		this.a = 50;
 		this.b = 50;
@@ -28,7 +29,7 @@ public class MyLabel extends JLabel {
 
 		setBounds(x, y, a, b);
 		setVisible(true);
-		new Mover().start();
+		// new Mover().start();
 	}
 
 	public void aleatorizar() {
@@ -61,32 +62,19 @@ public class MyLabel extends JLabel {
 		auxY *= -1;
 	}
 
-	public class Mover extends Thread {
-		public void run() {
+	public void Update() {
 
-			while (true) {
+		x -= speed * auxX;
+		y -= speed * auxY;
 
-				x -= speed * auxX;
-				y -= speed * auxY;
-
-				if (x > 800 - a - 15 || x < 0) {
-					contrarioX();
-				}
-				if (y > 600 - b - 40 || y < 0) {
-					contrarioY();
-				}
-
-				setLocation(x, y);
-
-				try {
-					sleep(10);
-
-				} catch (Exception erro) {
-
-				}
-
-			}
+		if (x > 800 - a - 15 || x < 0) {
+			contrarioX();
+		}
+		if (y > 600 - b - 40 || y < 0) {
+			contrarioY();
 		}
 
+		setLocation(x, y);
 	}
+
 }
