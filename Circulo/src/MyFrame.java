@@ -3,8 +3,8 @@ import java.util.Random;
 import javax.swing.*;
 
 public class MyFrame extends JFrame {
-	MyLabel[] ml = new MyLabel[10];
-	Point p = new Point(0, 1);
+	BSP bsp = new BSP();
+	
 	Random random = new Random();
 	Color color[] = { Color.PINK, Color.blue, Color.red, Color.yellow, Color.orange };
 	/**
@@ -17,11 +17,12 @@ public class MyFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 800, 600);
 		setResizable(false);
-
-		for (int i = 0; i < ml.length; i++) {
+		int tamanho=5;
+		for (int i = 0; i < tamanho; i++) {
 			Color cor = color[random.nextInt(5)];
-			ml[i] = new MyLabel(100 * i, 100 * i, p, cor);
-			add(ml[i]);
+			Boid b= new Boid(100 * i, 100 * i,  cor);
+			add(b);
+			bsp.Add(b);
 		}
 
 		new Mover().start();
@@ -33,15 +34,7 @@ public class MyFrame extends JFrame {
 
 			while (true) {
 
-				for (int i = 0; i < ml.length; i++) {
-					for (int j = i + 1; j < ml.length; j++) {
-						if(ml[i].Colidiu(ml[j])) {
-							break;
-						}
-					}
-					ml[i].Update();
-				}
-
+				bsp.update();
 				try {
 					sleep(10);
 

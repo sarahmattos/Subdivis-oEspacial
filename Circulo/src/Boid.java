@@ -9,19 +9,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.geom.Rectangle2D;
 
-public class MyLabel extends JLabel {
+public class Boid extends JLabel {
 
 	Color color;
 	int x, y, a, b;
 	int auxX = 1;
 	int auxY = 1;
 	float speed = 0;
-	Point p = new Point();
 
-	MyLabel(int _x, int _y, Point _p, Color _color) {
+	Boid(int _x, int _y,Color _color) {
 		this.a = 50;
 		this.b = 50;
-		this.p = _p;
 		this.x = _x;
 		this.y = _y;
 		this.color = _color;
@@ -52,6 +50,7 @@ public class MyLabel extends JLabel {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(color);
 		g2.fillOval(0, 0, a, b);
+		//System.out.print("draw");
 	}
 
 	public void contrarioX() {
@@ -76,7 +75,7 @@ public class MyLabel extends JLabel {
 
 		setLocation(x, y);
 	}
-	public boolean TesteColission(MyLabel ml3)
+	public boolean TesteColission(Boid ml3)
 	{
 		double x;
         double y;
@@ -91,7 +90,7 @@ public class MyLabel extends JLabel {
             return false;
         }
 	}
-		public boolean Colidiu(MyLabel ml2) {
+		public boolean Colidiu(Boid ml2) {
 	
 		if(TesteColission(ml2)) {
 			
