@@ -3,13 +3,13 @@ import java.util.Random;
 import javax.swing.*;
 
 public class MyFrame extends JFrame {
-	int tamanho=100;
+	int tamanho=15;
 	public static final int largura=800;
 	public static final int altura =600;
 	public static int colorCount=0;
-	BSP bsp = new BSP(colorRandom());
+	BSP bsp = new BSP(colorRandom(),null,1);
 	static Random random = new Random();
-	static Color color[] = { Color.PINK, Color.blue, Color.red, Color.yellow, Color.cyan, Color.BLACK , Color.green, Color.MAGENTA};
+	static Color color[] = { Color.PINK, Color.blue, Color.red, Color.yellow, Color.cyan,  Color.green, Color.MAGENTA};
 	/**
 	 * 
 	 */
