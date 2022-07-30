@@ -35,7 +35,9 @@ public class MyFrame extends JFrame {
 
 				for (int i = 0; i < ml.length; i++) {
 					for (int j = i + 1; j < ml.length; j++) {
-						ml[i].Colidiu(ml[j]);
+						if(ml[i].Colidiu(ml[j])) {
+							break;
+						}
 					}
 					ml[i].Update();
 				}

@@ -91,12 +91,18 @@ public class MyLabel extends JLabel {
             return false;
         }
 	}
-		public void Colidiu(MyLabel ml2) {
+		public boolean Colidiu(MyLabel ml2) {
 	
 		if(TesteColission(ml2)) {
 			
-			color=Color.BLACK;
-			ml2.color=Color.WHITE;
+			
+			contrarioX();
+			contrarioY();
+			
+			ml2.contrarioX();
+			ml2.contrarioY();
+			 return true;
 		}
+		 return false;
 	}
 }
