@@ -11,7 +11,7 @@ import java.awt.geom.Rectangle2D;
 
 public class Boid  {
 
-	Color color;
+	public Color color;
 	int x, y, a, b;
 	int auxX = 1;
 	int auxY = 1;
@@ -103,4 +103,19 @@ public class Boid  {
 		}
 		 return false;
 	}
+		public int getPositionX() {
+			return x;
+		}
+
+		public int getPositionY() {
+			return y;
+		}
+
+		public int getAltura() {
+			return a;
+		}
+
+		public int getLargura() {
+			return b;
+		}
 }

@@ -6,7 +6,7 @@ public class MyFrame extends JFrame {
 	
 	public static final int largura=800;
 	public static final int altura =600;
-	BSP bsp = new BSP(0,0,altura-100,largura-100,colorRandom());
+	BSP bsp = new BSP(0,0,altura,largura,colorRandom());
 	static Random random = new Random();
 	static Color color[] = { Color.PINK, Color.blue, Color.red, Color.yellow, Color.orange };
 	/**
