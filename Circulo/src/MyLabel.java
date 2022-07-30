@@ -51,7 +51,7 @@ public class MyLabel extends JLabel {
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(color);
-		g2.fillRect(0, 0, a, b);
+		g2.fillOval(0, 0, a, b);
 	}
 
 	public void contrarioX() {
@@ -76,5 +76,27 @@ public class MyLabel extends JLabel {
 
 		setLocation(x, y);
 	}
+	public boolean TesteColission(MyLabel ml3)
+	{
+		double x;
+        double y;
 
+
+        x = this.x - ml3.x;
+        y = this.y - ml3.y;
+
+        if (Math.sqrt((x*x) + (y*y)) < this.a) {
+            return true;
+        } else {
+            return false;
+        }
+	}
+		public void Colidiu(MyLabel ml2) {
+	
+		if(TesteColission(ml2)) {
+			
+			color=Color.BLACK;
+			ml2.color=Color.WHITE;
+		}
+	}
 }
