@@ -18,8 +18,8 @@ public class Boid  {
 	float speed = 0;
 
 	Boid(int _x, int _y,Color _color) {
-		this.a = 20;
-		this.b = 20;
+		this.a = 5;
+		this.b = 5;
 		this.x = _x;
 		this.y = _y;
 		this.color = _color;
@@ -46,8 +46,8 @@ public class Boid  {
 		}
 	}
 
-	public void draw(Graphics2D g) {
-		g.setColor(color);
+	public void draw(Graphics2D g, Color c) {
+		g.setColor(c);
 		g.fillOval(x, y, a, b);
 		//System.out.print("draw");
 	}

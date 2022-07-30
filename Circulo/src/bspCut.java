@@ -6,7 +6,7 @@ public class bspCut {
 	public bspCutResult getResult(ArrayList<Boid> b) {
 		count++;
 
-		if (true||count - 1 % 2 == 0) {
+		if ( count - 1 % 2 == 0) {
 			return horizontalCut(b);
 			
 		} else {
@@ -70,7 +70,7 @@ public class bspCut {
 				}
 				//System.out.println(media);
 				System.out.println("vertical");
-				return new bspCutResult(f1, f2, 2, media-b.get(i).getLargura());
+				return new bspCutResult(f1, f2, 1, media-b.get(i).getLargura());
 			}
 			// media+= b.get(i).getPositionY()+b.get(i).getAltura();
 		}

@@ -5,19 +5,17 @@ import java.awt.Color;
 import javax.swing.JLabel;
 
 public class BSP extends JLabel {
+	int max=5;
 	ArrayList<Boid> boid = new ArrayList<Boid>();
-	int positionX, positionY, altura, largura;
+	int positionX, positionY, tamanho;
 	bspCut cut;
 	Color color;
 	BSP folha1, folha2;
+	
 	boolean foiDiv = false;
-
-	public BSP(int positionX, int positionY, int largura,  int altura, Color color) {
-
-		this.positionX = positionX;
-		this.positionY = positionY;
-		this.altura = altura;
-		this.largura = largura;
+	
+	public BSP(Color color) {
+		
 		this.color = color;
 		cut = new bspCut();
 	}
@@ -27,7 +25,8 @@ public class BSP extends JLabel {
 	}
 
 	public void cut() {
-		foiDiv=boid.size()>2;
+		
+		foiDiv=boid.size()>max;
 		if(foiDiv) {
 			 bspCutResult result = cut.getResult(boid);
 			 for(int i=0; i< result.bFolha1.size(); i++) {
@@ -36,27 +35,23 @@ public class BSP extends JLabel {
 			 for(int i=0; i< result.bFolha2.size(); i++) {
 				 result.bFolha2.get(i).color =Color.GRAY;
 			 }
-			 int largura1,largura2, altura1, altura2;
 			 if(result.count%2==0) {
-				 largura1= largura;
-				 largura2 =largura;
-				 altura1= altura-(MyFrame.altura - result.media);
-				 altura2 = altura- altura1;
-						 
-				 folha1 = new BSP(positionX, positionY,largura1, altura1,color);
-				 folha2 = new BSP(positionX, altura1 ,largura2, altura2,color);
+				 positionX=0;
+				 positionY = result.media;
+				 tamanho= MyFrame.largura;
+				 folha1 = new BSP(MyFrame.colorRandom());
+				 folha2 = new BSP(MyFrame.colorRandom());
 			 }else {
-				
-				 largura1= largura;
-				 largura2 =largura;
-				 altura1= altura-(MyFrame.altura - result.media);
-				 altura2 = altura- altura1;
-						 
-				 folha1 = new BSP(positionX, positionY,largura1, altura1,color);
-				 folha2 = new BSP(positionX, positionY ,largura2, altura2,color);
+				 positionX=result.media;
+				 positionY = 0;
+				 tamanho= MyFrame.altura;
+				 folha1 = new BSP(MyFrame.colorRandom());
+				 folha2 = new BSP(MyFrame.colorRandom());
 			 }
 			 folha1.boid=result.bFolha1;
+			 folha1.cut.count=cut.count+1;
 			 folha2.boid=result.bFolha2;
+			 folha1.cut.count=cut.count+1;
 		}
 	}
 
@@ -82,14 +77,26 @@ public class BSP extends JLabel {
 
 	public void draw(Graphics2D g) {
 		if (!foiDiv) {
-			g.setColor(color);
-			g.drawRect(positionX, positionY, largura, altura);
+			//g.setColor(color);
+			//g.drawRect(positionX, positionY, largura, altura);
+			
 			for (int i = 0; i < boid.size(); i++) {
-				boid.get(i).draw(g);
+				boid.get(i).draw(g,color);
 			}
 		}else {
-			folha1.draw(g);
-			folha2.draw(g);
+			if(folha1!=null) {
+				folha1.draw(g);
+			}
+			if(folha2!=null) {
+				folha2.draw(g);
+			}
+			g.setColor(color);
+			
+			if(positionX==0) {
+				g.drawLine(0,positionY,tamanho,positionY);
+			}else if(positionY==0) {
+				g.drawLine(positionX,0,positionX,tamanho);
+			}
 		}
 		
 
