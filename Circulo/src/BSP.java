@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JLabel;
 
-public class BSP extends JLabel {
+public class BSP {
 	ArrayList<Boid> boid = new ArrayList<Boid>();
 	int positionX, positionY, altura, largura;
 	
-	
-	public void paint(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.BLACK);
-		g2.fillRect(positionX, positionY,  largura,altura);
+	public BSP() {
+		altura=200;
+		largura=200;
 	}
+	
 	public void Add(Boid b) {
 		boid.add(b);
 	}
@@ -27,5 +26,13 @@ public class BSP extends JLabel {
 			boid.get(i).Update();
 		}
 
+	}
+	public void draw(Graphics2D g) {
+		g.setColor(Color.BLACK);
+		g.drawRect(positionX, positionY,largura,altura);
+		for (int i = 0; i < boid.size(); i++) {
+		boid.get(i).draw(g);
+		}
+		
 	}
 }

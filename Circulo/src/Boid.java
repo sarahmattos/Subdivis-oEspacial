@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.geom.Rectangle2D;
 
-public class Boid extends JLabel {
+public class Boid  {
 
 	Color color;
 	int x, y, a, b;
@@ -18,15 +18,15 @@ public class Boid extends JLabel {
 	float speed = 0;
 
 	Boid(int _x, int _y,Color _color) {
-		this.a = 50;
-		this.b = 50;
+		this.a = 20;
+		this.b = 20;
 		this.x = _x;
 		this.y = _y;
 		this.color = _color;
 		aleatorizar();
 
-		setBounds(x, y, a, b);
-		setVisible(true);
+		//setBounds(x, y, a, b);
+		//setVisible(true);
 		// new Mover().start();
 	}
 
@@ -46,10 +46,9 @@ public class Boid extends JLabel {
 		}
 	}
 
-	public void paint(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(color);
-		g2.fillOval(0, 0, a, b);
+	public void draw(Graphics2D g) {
+		g.setColor(color);
+		g.fillOval(x, y, a, b);
 		//System.out.print("draw");
 	}
 
@@ -73,7 +72,7 @@ public class Boid extends JLabel {
 			contrarioY();
 		}
 
-		setLocation(x, y);
+		//setLocation(x, y);
 	}
 	public boolean TesteColission(Boid ml3)
 	{

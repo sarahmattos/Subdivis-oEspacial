@@ -17,11 +17,12 @@ public class MyFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 800, 600);
 		setResizable(false);
+		getContentPane().setBackground(Color.black);
 		int tamanho=5;
 		for (int i = 0; i < tamanho; i++) {
 			Color cor = color[random.nextInt(5)];
 			Boid b= new Boid(100 * i, 100 * i,  cor);
-			add(b);
+			//add(b);
 			bsp.Add(b);
 		}
 
@@ -45,5 +46,12 @@ public class MyFrame extends JFrame {
 			}
 		}
 
+	}
+	public void paint(Graphics g) {
+		g.clearRect(0, 0, 800, 600);
+		bsp.draw((Graphics2D)g);
+		repaint(100, 0, 0, 800, 600);
+		
+		System.out.print("entrou");
 	}
 }
