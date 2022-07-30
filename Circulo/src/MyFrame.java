@@ -20,16 +20,19 @@ public class MyFrame extends JFrame {
 		setBounds(0, 0, largura+100, altura+100);
 		setResizable(false);
 		getContentPane().setBackground(Color.WHITE);
-		int tamanho=5;
+		int tamanho=6;
 		for (int i = 0; i < tamanho; i++) {
 			Color cor = colorRandom();
-			Boid b= new Boid(100 * i, 100 * i,  cor);
+			Boid b= new Boid(getRandomNumber(0,largura), getRandomNumber(0,altura),  cor);
 			//add(b);
 			bsp.Add(b);
 		}
 		add(bsp);
 		new Mover().start();
 
+	}
+	public int getRandomNumber(int min, int max) {
+	    return (int) ((Math.random() * (max - min)) + min);
 	}
 	public static Color colorRandom() {
 		return color[random.nextInt(5)];

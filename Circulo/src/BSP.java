@@ -45,16 +45,27 @@ public class BSP extends JLabel {
 						 
 				 folha1 = new BSP(positionX, positionY,largura1, altura1,color);
 				 folha2 = new BSP(positionX, altura1 ,largura2, altura2,color);
+			 }else {
+				
+				 largura1= largura;
+				 largura2 =largura;
+				 altura1= altura-(MyFrame.altura - result.media);
+				 altura2 = altura- altura1;
+						 
+				 folha1 = new BSP(positionX, positionY,largura1, altura1,color);
+				 folha2 = new BSP(positionX, positionY ,largura2, altura2,color);
 			 }
-			 
+			 folha1.boid=result.bFolha1;
+			 folha2.boid=result.bFolha2;
 		}
 	}
 
 	public void update() {
 
-		cut();
+		
 
 		if (!foiDiv) {
+			cut();
 			for (int i = 0; i < boid.size(); i++) {
 				for (int j = i + 1; j < boid.size(); j++) {
 					if (boid.get(i).Colidiu(boid.get(j))) {
@@ -73,13 +84,14 @@ public class BSP extends JLabel {
 		if (!foiDiv) {
 			g.setColor(color);
 			g.drawRect(positionX, positionY, largura, altura);
+			for (int i = 0; i < boid.size(); i++) {
+				boid.get(i).draw(g);
+			}
 		}else {
 			folha1.draw(g);
 			folha2.draw(g);
 		}
-		for (int i = 0; i < boid.size(); i++) {
-			boid.get(i).draw(g);
-		}
+		
 
 	}
 
