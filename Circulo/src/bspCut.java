@@ -38,7 +38,7 @@ public class bspCut {
 					
 				}
 
-				System.out.println("horizontal");
+				
 				return new bspCutResult(f1, f2, 2, media-b.get(i).getAltura());
 			}
 			// media+= b.get(i).getPositionY()+b.get(i).getAltura();
@@ -69,7 +69,7 @@ public class bspCut {
 					
 				}
 				//System.out.println(media);
-				System.out.println("vertical");
+				
 				return new bspCutResult(f1, f2, 1, media-b.get(i).getLargura());
 			}
 			// media+= b.get(i).getPositionY()+b.get(i).getAltura();

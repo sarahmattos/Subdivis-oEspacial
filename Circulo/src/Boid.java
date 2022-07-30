@@ -18,8 +18,8 @@ public class Boid  {
 	float speed = 0;
 
 	Boid(int _x, int _y,Color _color) {
-		this.a = 5;
-		this.b = 5;
+		this.a = 3;
+		this.b = 3;
 		this.x = _x;
 		this.y = _y;
 		this.color = _color;
@@ -44,6 +44,7 @@ public class Boid  {
 		if (auxY == 0) {
 			auxY = -1;
 		}
+		speed=0.5f;
 	}
 
 	public void draw(Graphics2D g, Color c) {
@@ -61,15 +62,21 @@ public class Boid  {
 	}
 
 	public void Update() {
+		
+		x += 10f * auxX;
+		y += 10f *auxY ;
 
-		x -= speed * auxX;
-		y -= speed * auxY;
-
-		if (x > MyFrame.largura - a - 15 || x < 0) {
-			contrarioX();
+		
+		if (x > MyFrame.largura - a - 15) {
+			
+			auxX=-1;
+		}else if( x < a+10) {
+			auxX=1;
 		}
-		if (y > MyFrame.altura - b - 40 || y < 0) {
-			contrarioY();
+		if (y > MyFrame.altura - b - 40  ) {
+			auxY=-1;
+		}else if(y < b+10) {
+			auxY=1;
 		}
 
 		//setLocation(x, y);
@@ -96,7 +103,7 @@ public class Boid  {
 			
 			contrarioX();
 			contrarioY();
-			
+			ml2.color=Color.black;
 			ml2.contrarioX();
 			ml2.contrarioY();
 			 return true;

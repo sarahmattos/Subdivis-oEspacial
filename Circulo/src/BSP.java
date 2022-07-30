@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 public class BSP extends JLabel {
 	int filhoId;
-	int max = 5;
+	//int max = 5;
 	BSP pai;
 	ArrayList<Boid> boid = new ArrayList<Boid>();
 	int positionX, positionY, tamanho;
@@ -30,15 +30,10 @@ public class BSP extends JLabel {
 
 	public void cut() {
 
-		foiDiv = boid.size() > max;
+		foiDiv = boid.size() > MyFrame.quantBsp;
 		if (foiDiv) {
 			bspCutResult result = cut.getResult(boid);
-			for (int i = 0; i < result.bFolha1.size(); i++) {
-				result.bFolha1.get(i).color = Color.CYAN;
-			}
-			for (int i = 0; i < result.bFolha2.size(); i++) {
-				result.bFolha2.get(i).color = Color.GRAY;
-			}
+			
 			if (result.count % 2 == 0) {
 				positionX = 0;
 				positionY = result.media;
@@ -58,21 +53,26 @@ public class BSP extends JLabel {
 			folha1.cut.count = cut.count + 1;
 			folha2.boid = result.bFolha2;
 			folha1.cut.count = cut.count + 1;
+			if(pai!=null) {
+				boid.clear();
+			}
+			
 		}
 	}
 
 	public void update() {
-
+		cut();
 		if (!foiDiv) {
-			cut();
+			
 			for (int i = 0; i < boid.size(); i++) {
 				for (int j = i + 1; j < boid.size(); j++) {
 					if (boid.get(i).Colidiu(boid.get(j))) {
 						break;
 					}
 				}
-				// boid.get(i).Update();
+				 boid.get(i).Update();
 			}
+			
 		} else {
 			folha1.update();
 			folha2.update();
@@ -97,10 +97,11 @@ public class BSP extends JLabel {
 			g.setColor(color.black);
 
 			if (positionX == 0) {
-				if (pai == null) {
+				if (pai == null||pai.pai==null) {
 					tamanho = MyFrame.largura;
-					
-				}else {
+					g.drawLine(0, positionY, tamanho, positionY);
+				}
+				/*else {
 					tamanho=pai.media;
 				}
 				if(filhoId==1) {
@@ -109,12 +110,14 @@ public class BSP extends JLabel {
 					g.setColor(Color.orange);
 					g.drawLine(tamanho, positionY, MyFrame.largura, positionY);
 				}
-				
+				*/
 				
 			} else if (positionY == 0) {
 				if (pai == null) {
 					tamanho = MyFrame.altura;
-				}else{
+					g.drawLine(positionX, 0, positionX, tamanho);
+				}
+				/*else{
 					tamanho=pai.media;
 				}
 				if(filhoId==1) {
@@ -123,7 +126,7 @@ public class BSP extends JLabel {
 					g.setColor(Color.RED);
 					g.drawLine(positionX, tamanho, positionX, MyFrame.altura);
 				}
-				
+				*/
 				
 			}
 		}
@@ -133,7 +136,7 @@ public class BSP extends JLabel {
 	public void paint(Graphics g) {
 		// g.clearRect(0, 0, 800, 600);
 		draw((Graphics2D) g);
-		repaint(100, 0, 0, 800, 600);
+		repaint(100, 0, 0, MyFrame.largura+100, MyFrame.altura+100);
 
 	}
 
