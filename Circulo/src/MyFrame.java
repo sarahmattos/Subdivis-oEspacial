@@ -3,10 +3,12 @@ import java.util.Random;
 import javax.swing.*;
 
 public class MyFrame extends JFrame {
-	BSP bsp = new BSP();
 	
-	Random random = new Random();
-	Color color[] = { Color.PINK, Color.blue, Color.red, Color.yellow, Color.orange };
+	public static final int largura=800;
+	public static final int altura =600;
+	BSP bsp = new BSP(0,0,altura-100,largura-100,colorRandom());
+	static Random random = new Random();
+	static Color color[] = { Color.PINK, Color.blue, Color.red, Color.yellow, Color.orange };
 	/**
 	 * 
 	 */
@@ -15,21 +17,23 @@ public class MyFrame extends JFrame {
 	MyFrame() {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 800, 600);
+		setBounds(0, 0, largura, altura);
 		setResizable(false);
 		getContentPane().setBackground(Color.black);
 		int tamanho=5;
 		for (int i = 0; i < tamanho; i++) {
-			Color cor = color[random.nextInt(5)];
+			Color cor = colorRandom();
 			Boid b= new Boid(100 * i, 100 * i,  cor);
 			//add(b);
 			bsp.Add(b);
 		}
-
+		add(bsp);
 		new Mover().start();
 
 	}
-
+	public static Color colorRandom() {
+		return color[random.nextInt(5)];
+	}
 	public class Mover extends Thread {
 		public void run() {
 
@@ -47,11 +51,5 @@ public class MyFrame extends JFrame {
 		}
 
 	}
-	public void paint(Graphics g) {
-		g.clearRect(0, 0, 800, 600);
-		bsp.draw((Graphics2D)g);
-		repaint(100, 0, 0, 800, 600);
-		
-		System.out.print("entrou");
-	}
+	
 }

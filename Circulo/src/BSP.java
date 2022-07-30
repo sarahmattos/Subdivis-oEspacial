@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JLabel;
 
-public class BSP {
+public class BSP extends JLabel {
 	ArrayList<Boid> boid = new ArrayList<Boid>();
 	int positionX, positionY, altura, largura;
+	Color color;
 	
-	public BSP() {
-		altura=200;
-		largura=200;
+	public BSP(int positionX, int positionY, int altura, int largura, Color color) {
+		
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.altura = altura;
+		this.largura = largura;
+		this.color = color;
 	}
-	
+
 	public void Add(Boid b) {
 		boid.add(b);
 	}
@@ -28,11 +33,18 @@ public class BSP {
 
 	}
 	public void draw(Graphics2D g) {
-		g.setColor(Color.BLACK);
+		g.setColor(color);
 		g.drawRect(positionX, positionY,largura,altura);
 		for (int i = 0; i < boid.size(); i++) {
 		boid.get(i).draw(g);
 		}
 		
+	}
+	public void paint(Graphics g) {
+		//g.clearRect(0, 0, 800, 600);
+		draw((Graphics2D)g);
+		repaint(100, 0, 0, 800, 600);
+		
+		System.out.print("entrou");
 	}
 }

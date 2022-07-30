@@ -65,10 +65,10 @@ public class Boid  {
 		x -= speed * auxX;
 		y -= speed * auxY;
 
-		if (x > 800 - a - 15 || x < 0) {
+		if (x > MyFrame.largura - a - 15 || x < 0) {
 			contrarioX();
 		}
-		if (y > 600 - b - 40 || y < 0) {
+		if (y > MyFrame.altura - b - 40 || y < 0) {
 			contrarioY();
 		}
 
