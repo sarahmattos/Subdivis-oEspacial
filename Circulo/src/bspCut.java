@@ -35,7 +35,7 @@ public class bspCut {
 					}
 					
 				}
-				return new bspCutResult(f1, f2);
+				return new bspCutResult(f1, f2, 2, media-b.get(i).getAltura());
 			}
 			// media+= b.get(i).getPositionY()+b.get(i).getAltura();
 		}

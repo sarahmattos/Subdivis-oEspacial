@@ -6,7 +6,7 @@ public class MyFrame extends JFrame {
 	
 	public static final int largura=800;
 	public static final int altura =600;
-	BSP bsp = new BSP(0,0,altura,largura,colorRandom());
+	BSP bsp = new BSP(0,0,largura,altura,colorRandom());
 	static Random random = new Random();
 	static Color color[] = { Color.PINK, Color.blue, Color.red, Color.yellow, Color.orange };
 	/**
@@ -17,9 +17,9 @@ public class MyFrame extends JFrame {
 	MyFrame() {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, largura, altura);
+		setBounds(0, 0, largura+100, altura+100);
 		setResizable(false);
-		getContentPane().setBackground(Color.black);
+		getContentPane().setBackground(Color.WHITE);
 		int tamanho=5;
 		for (int i = 0; i < tamanho; i++) {
 			Color cor = colorRandom();
