@@ -16,6 +16,7 @@ public class BSP extends JLabel {
 	int media;
 	boolean foiDiv = false;
 
+	//método construtor
 	public BSP(Color color, BSP _pai, int _filhoId) {
 
 		this.color = color;
@@ -23,31 +24,34 @@ public class BSP extends JLabel {
 		this.pai = _pai;
 		this.filhoId = _filhoId;
 	}
-
+	//adicionar boid no bsp
 	public void Add(Boid b) {
 		boid.add(b);
 	}
 
 	public void cut() {
-
+		//enquanto o numero de boids for maior que nossa quantidade determinada, as divisões irão acontecer
 		foiDiv = boid.size() > MyFrame.quantBsp;
 		if (foiDiv) {
+			//corte horizontal ou vertical
 			bspCutResult result = cut.getResult(boid);
 			
 			if (result.count % 2 == 0) {
+				//horizontal
 				positionX = 0;
 				positionY = result.media;
 				
 				folha1 = new BSP(MyFrame.colorRandom(), this,1);
 				folha2 = new BSP(MyFrame.colorRandom(), this,2);
 			} else {
-				
+				//vertical
 				positionX = result.media;
 				positionY = 0;
 				
 				folha1 = new BSP(MyFrame.colorRandom(), this,1);
 				folha2 = new BSP(MyFrame.colorRandom(), this,2);
 			}
+			//as folhas recebem a lista de seus boids
 			media=result.media;
 			folha1.boid = result.bFolha1;
 			folha1.cut.count = cut.count + 1;
@@ -63,17 +67,19 @@ public class BSP extends JLabel {
 	public void update() {
 		cut();
 		if (!foiDiv) {
-			
+			//testa colisão
 			for (int i = 0; i < boid.size(); i++) {
 				for (int j = i + 1; j < boid.size(); j++) {
 					if (boid.get(i).Colidiu(boid.get(j))) {
 						break;
 					}
 				}
+				//movimento
 				 boid.get(i).Update();
 			}
 			
 		} else {
+			//chama o update das folhas
 			folha1.update();
 			folha2.update();
 		}
@@ -81,13 +87,12 @@ public class BSP extends JLabel {
 
 	public void draw(Graphics2D g) {
 		if (!foiDiv) {
-			// g.setColor(color);
-			// g.drawRect(positionX, positionY, largura, altura);
-
+			//desenha
 			for (int i = 0; i < boid.size(); i++) {
 				boid.get(i).draw(g, color);
 			}
 		} else {
+			
 			if (folha1 != null) {
 				folha1.draw(g);
 			}
@@ -97,10 +102,12 @@ public class BSP extends JLabel {
 			g.setColor(color.black);
 
 			if (positionX == 0) {
+				//primeira linha horizontal
 				if (pai == null||pai.pai==null) {
 					tamanho = MyFrame.largura;
 					g.drawLine(0, positionY, tamanho, positionY);
 				}
+				//desenha linha dos filhos descontinuada
 				/*else {
 					tamanho=pai.media;
 				}
@@ -114,6 +121,7 @@ public class BSP extends JLabel {
 				
 			} else if (positionY == 0) {
 				if (pai == null) {
+					//primeira linha vertical
 					tamanho = MyFrame.altura;
 					g.drawLine(positionX, 0, positionX, tamanho);
 				}
@@ -134,7 +142,6 @@ public class BSP extends JLabel {
 	}
 
 	public void paint(Graphics g) {
-		// g.clearRect(0, 0, 800, 600);
 		draw((Graphics2D) g);
 		repaint(100, 0, 0, MyFrame.largura+100, MyFrame.altura+100);
 

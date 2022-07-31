@@ -4,6 +4,7 @@ public class bspCutResult {
 	public ArrayList<Boid> bFolha1, bFolha2 = new ArrayList<Boid>();
 	public int count;
 	public int media;
+	//lista de boids das folhas
 	public bspCutResult(ArrayList<Boid> bFolha1, ArrayList<Boid> bFolha2, int _count, int _media) {
 
 		this.bFolha1 = bFolha1;

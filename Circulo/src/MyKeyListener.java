@@ -14,6 +14,7 @@ public class MyKeyListener implements KeyListener {
 
         @Override
         public void keyReleased(KeyEvent e) {
+        	//pause ou diinuição de frames por segundo
         	if(e.getKeyCode()==49) {
         		if(time==100) {
         			time=1000;

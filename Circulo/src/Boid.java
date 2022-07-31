@@ -16,7 +16,7 @@ public class Boid  {
 	int auxX = 1;
 	int auxY = 1;
 	float speed = 0;
-
+	//metodo construtor
 	Boid(int _x, int _y,Color _color) {
 		this.a = 20;
 		this.b = 20;
@@ -25,11 +25,8 @@ public class Boid  {
 		this.color = _color;
 		aleatorizar();
 
-		//setBounds(x, y, a, b);
-		//setVisible(true);
-		// new Mover().start();
 	}
-
+	//função para aleatorizar a velocidade e direção inicial
 	public void aleatorizar() {
 
 		Random random = new Random();
@@ -44,29 +41,31 @@ public class Boid  {
 		if (auxY == 0) {
 			auxY = -1;
 		}
+		//no final deixei a speed fixa para debugar melhor os testes
 		speed=0.5f;
 	}
 
+	//funçao desenhar
 	public void draw(Graphics2D g, Color c) {
 		g.setColor(c);
 		g.fillOval(x, y, a, b);
-		//System.out.print("draw");
 	}
 
+	//invertendo direção em X
 	public void contrarioX() {
 		auxX *= -1;
 	}
-
+	//invertendo direção em Y
 	public void contrarioY() {
 		auxY *= -1;
 	}
-
+	//update
 	public void Update() {
-		
+		//movimento
 		x += 10f * auxX;
 		y += 10f *auxY ;
 
-		
+		//colissão com o mundo
 		if (x > MyFrame.largura - a - 15) {
 			
 			auxX=-1;
@@ -79,8 +78,8 @@ public class Boid  {
 			auxY=1;
 		}
 
-		//setLocation(x, y);
 	}
+	//testando colisão
 	public boolean TesteColission(Boid ml3)
 	{
 		double x;
@@ -96,6 +95,7 @@ public class Boid  {
             return false;
         }
 	}
+		//gerenciando o que fazer quando colidir
 		public boolean Colidiu(Boid ml2) {
 	
 		if(TesteColission(ml2)) {
@@ -110,6 +110,7 @@ public class Boid  {
 		}
 		 return false;
 	}
+		//gets de algumas variaveis
 		public int getPositionX() {
 			return x;
 		}
