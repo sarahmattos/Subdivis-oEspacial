@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public class MyFrame extends JFrame {
 	public static int quantBsp = 10;
-	int tamanho = 5000;
-	public boolean useBSP=false;
+	int tamanho = 30;
+	public boolean useBSP=true;
 	
 	
 	
@@ -61,7 +61,7 @@ public class MyFrame extends JFrame {
 	public class Mover extends Thread {
 		public void run() {
 
-			while (countMedia<50) {
+			while (true||countMedia<50) {
 				long start = System.nanoTime();
 				if (!mkl.pause) {
 					if(useBSP) {

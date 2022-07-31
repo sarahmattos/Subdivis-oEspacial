@@ -18,8 +18,8 @@ public class Boid  {
 	float speed = 0;
 
 	Boid(int _x, int _y,Color _color) {
-		this.a = 3;
-		this.b = 3;
+		this.a = 20;
+		this.b = 20;
 		this.x = _x;
 		this.y = _y;
 		this.color = _color;
